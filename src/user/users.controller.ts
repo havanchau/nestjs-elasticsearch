@@ -11,7 +11,7 @@ export class UsersController {
   }
 
   @Get('search')
-  async searchUser(@Query('keyword') keyword: string) {
-    return this.usersService.search(keyword);
+  async searchUser(@Query('name') name: string, @Query('email') email: string) {
+    return this.usersService.search({name, email});
   }
 }

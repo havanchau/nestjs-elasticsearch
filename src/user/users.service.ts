@@ -28,15 +28,31 @@ export class UsersService {
     return savedUser;
   }
 
-  async search(keyword: string): Promise<any> {
+  async search(params: { name?: string; email?: string }): Promise<any> {
+
+    const must: any[] = [];
+  
+    if (params.name) {
+      must.push({
+        match: { name: params.name },
+      });
+    }
+  
+    if (params.email) {
+      must.push({
+        match: { email: params.email },
+      });
+    }
+
+    const query = {
+      bool: {
+        must,
+      },
+    };
+
     const result = await this.elasticsearchService.searchDocuments({
       index: 'users',
-      query: {
-        multi_match: {
-          query: keyword,
-          fields: ['name', 'email'],
-        },
-      },
+      query,
       size: 100,
     });
 
