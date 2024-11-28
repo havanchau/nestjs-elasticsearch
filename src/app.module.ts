@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './user/users.module';
-import { ElasticsearchCustomModule } from './elasticsearch/elasticsearch.module';
+import { ElasticsearchModule } from './elasticsearch/elasticsearch.module';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -19,7 +19,7 @@ dotenv.config();
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    ElasticsearchCustomModule,
+    ElasticsearchModule,
     UsersModule
   ],
   controllers: [AppController],

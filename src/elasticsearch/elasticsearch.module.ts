@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ElasticsearchModule } from '@nestjs/elasticsearch';
+import { ElasticsearchModule as Elasticsearch } from '@nestjs/elasticsearch';
 import { ElasticsearchService } from './elasticsearch.service';
 
 @Module({
   imports: [
     ConfigModule,
-    ElasticsearchModule.register({
+    Elasticsearch.register({
       node: 'http://localhost:9200',
     }),
   ],
   providers: [ElasticsearchService],
-  exports: [ElasticsearchModule, ElasticsearchService],
+  exports: [Elasticsearch, ElasticsearchService],
 })
-export class ElasticsearchCustomModule {}
+export class ElasticsearchModule {}
